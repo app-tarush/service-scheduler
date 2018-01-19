@@ -1,0 +1,4 @@
+mongo-data
+mongo-config
+.DS_Store
+node_modules

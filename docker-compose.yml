@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  mongodb:
+    image: mongo:3.6.2
+    restart: always
+    container_name: mongodb
+    volumes:
+      - ./mongo-data/:/data/db
+      - ./mongo-config/:/data/configdb
+    ports:
+      - "27017:27017"
+  scheduler:
+    build: .
+    restart: always
+    environment:
+      - VAULT_RID
+      - VAULT_SID
+      - DB_ADDR=mongodb://mongodb:27017
+      - DB_COLL=agenda
+      - PORT=3001
+    links:
+      - mongodb
+    expose:
+      - 3001
+
