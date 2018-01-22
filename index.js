@@ -15,7 +15,7 @@ function getConfiguration() {
         config.dbAddress = process.env.DB_ADDR
         config.dbCollection = process.env.DB_COLL
         config.jobs = ["test","https"]
-        config.cookieKey = ""
+        config.cookieKey = "abac"
         resolve(config)
     })
 }
