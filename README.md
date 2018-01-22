@@ -1,4 +1,4 @@
-# WATERWHEEL
+# Scheduler
 
 A scheduling system capable of being tasked by individuals or software modules that will keep track of what to do
 and how often it should be done. This exists to reduce the workload of tasks that currently need to be done
