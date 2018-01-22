@@ -23,4 +23,6 @@ services:
       - mongodb
     expose:
       - 3001
+    ports:
+      - "3001:3001"
 

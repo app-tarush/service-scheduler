@@ -23,7 +23,8 @@
         "express": "^4.15.2",
         "glob": "^7.1.1",
         "log4js": "^1.1.1",
-        "request": "^2.81.0"
+        "request": "^2.81.0",
+        "serve-static": "^1.13.1"
     },
     "devDependencies": {
         "chai": "^3.5.0",
