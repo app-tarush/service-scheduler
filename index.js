@@ -9,6 +9,13 @@ const cookieSession = require('cookie-session')
 const Agenda = require('agenda')
 const Agendash = require('agendash')
 
+var path = require("path");
+var cookieParser = require('cookie-parser');
+var logger = require("morgan");
+require("dotenv").load();
+var job = require("./routes/job");
+
+
 function getConfiguration() {
     return new Promise((resolve,reject) => {
         let config = {}
@@ -23,10 +30,16 @@ function getConfiguration() {
 function startServer(config) {
     const app = express()
     const agenda = new Agenda({ db: { address: config.dbAddress, collection: config.dbCollection } })
-    app.use('/agendash', Agendash(agenda))
-    app.use(cors())
-    app.use(bodyParser.json())
-    app.use(bodyParser.urlencoded({ extended: false }))
+    app.use('/agendash', Agendash(agenda));
+    app.use(cors());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+
+    app.use(cookieParser());
+    app.use(express.static(path.join(__dirname, 'public')));
+
+    app.use('/job', job);
+
     app.use(cookieSession({
         name: 'session',
         secret: config.cookieKey
