@@ -1,0 +1,188 @@
+{
+	"info": {
+		"name": "Scheduler",
+		"_postman_id": "6faa4057-a861-a190-5b0f-45278f305029",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Schedule Job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"jobName\": \"Elastic Search Monitor\",\n\"url\": \"http://localhost:9200/_cluster/stats\",\n\"frequency\": \"10 seconds\",\n\"responseSchemaMapping\": \"{\\\"mappings\\\": {\\\"metrics\\\": {\\\"properties\\\": {\\\"data\\\": {\\\"properties\\\": {\\\"_nodes\\\": {\\\"properties\\\": {\\\"failed\\\": {\\\"type\\\": \\\"long\\\"}, \\\"successful\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"cluster_name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"indices\\\": {\\\"properties\\\": {\\\"completion\\\": {\\\"properties\\\": {\\\"size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"docs\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"deleted\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"fielddata\\\": {\\\"properties\\\": {\\\"evictions\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"query_cache\\\": {\\\"properties\\\": {\\\"cache_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"cache_size\\\": {\\\"type\\\": \\\"long\\\"}, \\\"evictions\\\": {\\\"type\\\": \\\"long\\\"}, \\\"hit_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"miss_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total_count\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"segments\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"doc_values_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"file_sizes\\\": {\\\"type\\\": \\\"object\\\"}, \\\"fixed_bit_set_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"index_writer_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max_unsafe_auto_id_timestamp\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"norms_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"points_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"stored_fields_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"term_vectors_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"terms_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"version_map_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"shards\\\": {\\\"properties\\\": {\\\"index\\\": {\\\"properties\\\": {\\\"primaries\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"float\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"replication\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"shards\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"float\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"primaries\\\": {\\\"type\\\": \\\"long\\\"}, \\\"replication\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"store\\\": {\\\"properties\\\": {\\\"size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"throttle_time_in_millis\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"nodes\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"properties\\\": {\\\"coordinating_only\\\": {\\\"type\\\": \\\"long\\\"}, \\\"data\\\": {\\\"type\\\": \\\"long\\\"}, \\\"ingest\\\": {\\\"type\\\": \\\"long\\\"}, \\\"master\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"fs\\\": {\\\"properties\\\": {\\\"available_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"free_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"spins\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"total_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"jvm\\\": {\\\"properties\\\": {\\\"max_uptime_in_millis\\\": {\\\"type\\\": \\\"long\\\"}, \\\"mem\\\": {\\\"properties\\\": {\\\"heap_max_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"heap_used_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"threads\\\": {\\\"type\\\": \\\"long\\\"}, \\\"versions\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"version\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_vendor\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_version\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } } } }, \\\"network_types\\\": {\\\"properties\\\": {\\\"http_types\\\": {\\\"properties\\\": {\\\"netty4\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"transport_types\\\": {\\\"properties\\\": {\\\"netty4\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"os\\\": {\\\"properties\\\": {\\\"allocated_processors\\\": {\\\"type\\\": \\\"long\\\"}, \\\"available_processors\\\": {\\\"type\\\": \\\"long\\\"}, \\\"mem\\\": {\\\"properties\\\": {\\\"free_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"free_percent\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"used_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"used_percent\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"names\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } } } }, \\\"process\\\": {\\\"properties\\\": {\\\"cpu\\\": {\\\"properties\\\": {\\\"percent\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"open_file_descriptors\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"versions\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } }, \\\"status\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"timestamp\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"id\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"timestamp\\\": {\\\"type\\\": \\\"date\\\"} } } } }\",\n\"index\": \"es_cluster_stat\",\n\"type\": \"metrics\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3001/job/schedule",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"job",
+						"schedule"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List Jobs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:3001/job/list",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"job",
+						"list"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Job Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:3001/job/search/Elastic Search Monitor",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"job",
+						"search",
+						"Elastic Search Monitor"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Job Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:3001/job/cancel/Elastic Search Monitor",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"job",
+						"cancel",
+						"Elastic Search Monitor"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Schedule Job to run now",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"jobName\": \"Elastic Search Monitor\",\n\"url\": \"http://localhost:9200/_cluster/stats\",\n\"responseSchemaMapping\": \"{\\\"mappings\\\": {\\\"metrics\\\": {\\\"properties\\\": {\\\"data\\\": {\\\"properties\\\": {\\\"_nodes\\\": {\\\"properties\\\": {\\\"failed\\\": {\\\"type\\\": \\\"long\\\"}, \\\"successful\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"cluster_name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"indices\\\": {\\\"properties\\\": {\\\"completion\\\": {\\\"properties\\\": {\\\"size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"docs\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"deleted\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"fielddata\\\": {\\\"properties\\\": {\\\"evictions\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"query_cache\\\": {\\\"properties\\\": {\\\"cache_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"cache_size\\\": {\\\"type\\\": \\\"long\\\"}, \\\"evictions\\\": {\\\"type\\\": \\\"long\\\"}, \\\"hit_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"miss_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total_count\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"segments\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"doc_values_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"file_sizes\\\": {\\\"type\\\": \\\"object\\\"}, \\\"fixed_bit_set_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"index_writer_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max_unsafe_auto_id_timestamp\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"norms_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"points_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"stored_fields_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"term_vectors_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"terms_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"version_map_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"shards\\\": {\\\"properties\\\": {\\\"index\\\": {\\\"properties\\\": {\\\"primaries\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"float\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"replication\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"shards\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"float\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"primaries\\\": {\\\"type\\\": \\\"long\\\"}, \\\"replication\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"store\\\": {\\\"properties\\\": {\\\"size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"throttle_time_in_millis\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"nodes\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"properties\\\": {\\\"coordinating_only\\\": {\\\"type\\\": \\\"long\\\"}, \\\"data\\\": {\\\"type\\\": \\\"long\\\"}, \\\"ingest\\\": {\\\"type\\\": \\\"long\\\"}, \\\"master\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"fs\\\": {\\\"properties\\\": {\\\"available_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"free_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"spins\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"total_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"jvm\\\": {\\\"properties\\\": {\\\"max_uptime_in_millis\\\": {\\\"type\\\": \\\"long\\\"}, \\\"mem\\\": {\\\"properties\\\": {\\\"heap_max_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"heap_used_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"threads\\\": {\\\"type\\\": \\\"long\\\"}, \\\"versions\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"version\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_vendor\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_version\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } } } }, \\\"network_types\\\": {\\\"properties\\\": {\\\"http_types\\\": {\\\"properties\\\": {\\\"netty4\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"transport_types\\\": {\\\"properties\\\": {\\\"netty4\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"os\\\": {\\\"properties\\\": {\\\"allocated_processors\\\": {\\\"type\\\": \\\"long\\\"}, \\\"available_processors\\\": {\\\"type\\\": \\\"long\\\"}, \\\"mem\\\": {\\\"properties\\\": {\\\"free_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"free_percent\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"used_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"used_percent\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"names\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } } } }, \\\"process\\\": {\\\"properties\\\": {\\\"cpu\\\": {\\\"properties\\\": {\\\"percent\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"open_file_descriptors\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"versions\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } }, \\\"status\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"timestamp\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"id\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"timestamp\\\": {\\\"type\\\": \\\"date\\\"} } } } }\",\n\"index\": \"es_cluster_stat\",\n\"type\": \"metrics\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3001/job/schedule/now",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"job",
+						"schedule",
+						"now"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Schedule a job to run once",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"jobName\": \"Elastic Search Monitor\",\n\"frequency\": \"in 1 minute\",\n\"url\": \"http://localhost:9200/_cluster/stats\",\n\"responseSchemaMapping\": \"{\\\"mappings\\\": {\\\"metrics\\\": {\\\"properties\\\": {\\\"data\\\": {\\\"properties\\\": {\\\"_nodes\\\": {\\\"properties\\\": {\\\"failed\\\": {\\\"type\\\": \\\"long\\\"}, \\\"successful\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"cluster_name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"indices\\\": {\\\"properties\\\": {\\\"completion\\\": {\\\"properties\\\": {\\\"size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"docs\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"deleted\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"fielddata\\\": {\\\"properties\\\": {\\\"evictions\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"query_cache\\\": {\\\"properties\\\": {\\\"cache_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"cache_size\\\": {\\\"type\\\": \\\"long\\\"}, \\\"evictions\\\": {\\\"type\\\": \\\"long\\\"}, \\\"hit_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"miss_count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total_count\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"segments\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"doc_values_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"file_sizes\\\": {\\\"type\\\": \\\"object\\\"}, \\\"fixed_bit_set_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"index_writer_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max_unsafe_auto_id_timestamp\\\": {\\\"type\\\": \\\"long\\\"}, \\\"memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"norms_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"points_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"stored_fields_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"term_vectors_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"terms_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"version_map_memory_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"shards\\\": {\\\"properties\\\": {\\\"index\\\": {\\\"properties\\\": {\\\"primaries\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"float\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"replication\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"shards\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"float\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"primaries\\\": {\\\"type\\\": \\\"long\\\"}, \\\"replication\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"store\\\": {\\\"properties\\\": {\\\"size_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"throttle_time_in_millis\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"nodes\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"properties\\\": {\\\"coordinating_only\\\": {\\\"type\\\": \\\"long\\\"}, \\\"data\\\": {\\\"type\\\": \\\"long\\\"}, \\\"ingest\\\": {\\\"type\\\": \\\"long\\\"}, \\\"master\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"fs\\\": {\\\"properties\\\": {\\\"available_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"free_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"spins\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"total_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"jvm\\\": {\\\"properties\\\": {\\\"max_uptime_in_millis\\\": {\\\"type\\\": \\\"long\\\"}, \\\"mem\\\": {\\\"properties\\\": {\\\"heap_max_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"heap_used_in_bytes\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"threads\\\": {\\\"type\\\": \\\"long\\\"}, \\\"versions\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"version\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_vendor\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"vm_version\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } } } }, \\\"network_types\\\": {\\\"properties\\\": {\\\"http_types\\\": {\\\"properties\\\": {\\\"netty4\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"transport_types\\\": {\\\"properties\\\": {\\\"netty4\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"os\\\": {\\\"properties\\\": {\\\"allocated_processors\\\": {\\\"type\\\": \\\"long\\\"}, \\\"available_processors\\\": {\\\"type\\\": \\\"long\\\"}, \\\"mem\\\": {\\\"properties\\\": {\\\"free_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"free_percent\\\": {\\\"type\\\": \\\"long\\\"}, \\\"total_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"used_in_bytes\\\": {\\\"type\\\": \\\"long\\\"}, \\\"used_percent\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"names\\\": {\\\"properties\\\": {\\\"count\\\": {\\\"type\\\": \\\"long\\\"}, \\\"name\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } } } }, \\\"process\\\": {\\\"properties\\\": {\\\"cpu\\\": {\\\"properties\\\": {\\\"percent\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"open_file_descriptors\\\": {\\\"properties\\\": {\\\"avg\\\": {\\\"type\\\": \\\"long\\\"}, \\\"max\\\": {\\\"type\\\": \\\"long\\\"}, \\\"min\\\": {\\\"type\\\": \\\"long\\\"} } } } }, \\\"versions\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } } } }, \\\"status\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"timestamp\\\": {\\\"type\\\": \\\"long\\\"} } }, \\\"id\\\": {\\\"type\\\": \\\"text\\\", \\\"fields\\\": {\\\"keyword\\\": {\\\"type\\\": \\\"keyword\\\", \\\"ignore_above\\\": 256 } } }, \\\"timestamp\\\": {\\\"type\\\": \\\"date\\\"} } } } }\",\n\"index\": \"es_cluster_stat\",\n\"type\": \"metrics\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3001/job/schedule/once",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"job",
+						"schedule",
+						"once"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -12,13 +12,13 @@ const cookieParser = require('cookie-parser')
 const job = require("./routes/job");
 const VAULT = require('node-module-vault')
 const logger = require('log4js').getLogger()
-const li = new VAULT(process.env.VAULT_RID, process.env.VAULT_SID,process.env.VAULT_ADDR)
+const vault = new VAULT(process.env.VAULT_RID, process.env.VAULT_SID,process.env.VAULT_ADDR)
 logger.level = 'debug'
 
 function getConfiguration() {
     return new Promise((resolve, reject) => {
         let config = {}
-        li.read(`secret/API/schedulerservice/config-test`)
+        vault.read(`secret/API/schedulerservice/config`)
             .then((secrets) => {
                 config.cookieKey = secrets.cookieKey
                 config.app_port = secrets.app_port
@@ -59,12 +59,8 @@ function startServer(config) {
         require('./jobs/' + job)(agenda);
     })
     agenda.on('ready', function() {
-        agenda.every('1 day', 'console test', { "outputConsoleMessage": "test" });
         agenda.start();
     })
-    if (jobTypes.length) {
-        //   agenda.start();
-    }
     // Configured Express and some middleware
 
     // Set production only middleware
@@ -117,8 +113,7 @@ function startServer(config) {
         // Add in production logging and cert checks
         logger.info('Running in production mode.')
         let sslOptions = {
-            ca: fs.readFileSync('certs/ix3net_ca.crt'),
-            // ca: fs.readFileSync('certs/globosign_ca.crt'),
+            ca: fs.readFileSync('certs/ca.crt'),
             key: fs.readFileSync('certs/server.key'),
             cert: fs.readFileSync('certs/server.crt'),
             requestCert: true,

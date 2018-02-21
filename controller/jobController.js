@@ -5,12 +5,12 @@ const es = require("../config/elasticsearch");
 const dateTime = require('date-time');
 const VAULT = require('node-module-vault')
 const logger = require('log4js').getLogger()
-const li = new VAULT(process.env.VAULT_RID, process.env.VAULT_SID,process.env.VAULT_ADDR)
+const vault = new VAULT(process.env.VAULT_RID, process.env.VAULT_SID,process.env.VAULT_ADDR)
 
 function getConfiguration() {
     return new Promise((resolve, reject) => {
         let config = {}
-        li.read(`secret/API/schedulerservice/config-test`)
+        vault.read(`secret/API/schedulerservice/config`)
             .then((secrets) => {
                 config.agenda = new Agenda({ db: { address: secrets.mongo_db_addr} })
                 config.agenda.on('ready', function () {
@@ -46,7 +46,7 @@ function metricCollector(job) {
                 return es.createIndex(indexName).then(function () {
                     var mapping = JSON.parse(job.attrs.data.responseSchemaMapping);
                     if (Object.keys(mapping).length === 0) {
-                        console.log("response schema mapping not defined!");
+                        logger.error("response schema mapping not defined!");
                     } else {
                         es.addMapping(indexName, type, mapping);
                     }
@@ -55,10 +55,10 @@ function metricCollector(job) {
         }).then(function () {
             return es.addDocument(indexName, type, metric);
         }).catch(function (error) {
-            console.log(error);
+            logger.error(error);
         });
     }).catch(function (error) {
-        console.log(error);
+        logger.error(error);
     });
 }
 

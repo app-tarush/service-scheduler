@@ -2,7 +2,7 @@ const elasticsearch = require('elasticsearch')
 const VAULT = require('node-module-vault')
 const vault = new VAULT(process.env.VAULT_RID, process.env.VAULT_SID,process.env.VAULT_ADDR)
 let config = {}
-vault.read(`secret/API/schedulerservice/config-test`)
+vault.read(`secret/API/schedulerservice/config`)
     .then((secrets) => {
         config.elastic_db_addr = secrets.elastic_db_addr
         config.elastic_db_port = secrets.elastic_db_port
