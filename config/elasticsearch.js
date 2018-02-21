@@ -4,10 +4,9 @@ const vault = new VAULT(process.env.VAULT_RID, process.env.VAULT_SID,process.env
 let config = {}
 vault.read(`secret/API/schedulerservice/config`)
     .then((secrets) => {
-        config.elastic_db_addr = secrets.elastic_db_addr
-        config.elastic_db_port = secrets.elastic_db_port
+        config.elastic_db_addr = JSON.parse(secrets.elastic_db_addr)
         var client = new elasticsearch.Client({
-            host: config.elastic_db_addr + ':' + config.elastic_db_port,
+            hosts: config.elastic_db_addr,
             log: 'error'
         })
 
