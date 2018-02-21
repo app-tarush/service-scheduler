@@ -16,13 +16,27 @@ services:
     environment:
       - VAULT_RID
       - VAULT_SID
-      - DB_ADDR=mongodb://mongodb:27017
-      - DB_COLL=agenda
-      - PORT=3001
+      - VAULT_ADDR
     links:
       - mongodb
+      - elastic
     expose:
       - 3001
     ports:
       - "3001:3001"
-
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+volumes:
+  esdata:
+    driver: local

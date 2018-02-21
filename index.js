@@ -2,34 +2,41 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const glob = require('glob')
-const logger = require('./lib/logger')
 const fs = require('fs')
 const https = require('https')
 const cookieSession = require('cookie-session')
 const Agenda = require('agenda')
 const Agendash = require('agendash')
-
-var path = require("path");
-var cookieParser = require('cookie-parser');
-var logger = require("morgan");
-require("dotenv").load();
-var job = require("./routes/job");
-
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const job = require("./routes/job");
+const VAULT = require('node-module-vault')
+const logger = require('log4js').getLogger()
+const li = new VAULT(process.env.VAULT_RID, process.env.VAULT_SID,process.env.VAULT_ADDR)
+logger.level = 'debug'
 
 function getConfiguration() {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
         let config = {}
-        config.dbAddress = process.env.DB_ADDR
-        config.dbCollection = process.env.DB_COLL
-        config.jobs = ["test","https"]
-        config.cookieKey = "abac"
-        resolve(config)
+        li.read(`secret/API/schedulerservice/config-test`)
+            .then((secrets) => {
+                config.cookieKey = secrets.cookieKey
+                config.app_port = secrets.app_port
+                config.elastic_db_addr = secrets.elastic_db_addr
+                config.elastic_db_port = secrets.elastic_db_port
+                config.mongo_db_addr = secrets.mongo_db_addr
+                config.jobs = secrets.jobs.split(',')
+                resolve(config)
+            })
+            .catch((err) => {
+                reject(err)
+            })
     })
 }
 
 function startServer(config) {
     const app = express()
-    const agenda = new Agenda({ db: { address: config.dbAddress, collection: config.dbCollection } })
+    const agenda = new Agenda({ db: { address: config.mongo_db_addr} })
     app.use('/agendash', Agendash(agenda));
     app.use(cors());
     app.use(bodyParser.json());
@@ -103,7 +110,7 @@ function startServer(config) {
 
     // Create servers depending on deployment type
     let server
-    let port = process.env.PORT || '8000'
+    let port = config.app_port || '8000'
     app.set('port', port)
         // Set SSL options for prod
     if (app.get('env') === 'production') {
@@ -132,7 +139,7 @@ function startServer(config) {
         http.listen(httpPort)
             // Just start without SSL
     } else {
-        logger.warn('Running in development mode.')
+        logger.info('Running in development mode.')
         server = app.listen(port)
         server.timeout = 900000
         server.on('error', (err) => { logger.error(err) })
@@ -143,8 +150,9 @@ function startServer(config) {
 // Get secrets and then start server
 getConfiguration()
     .then((config) => {
-        startServer(config)
+       startServer(config)
     })
     .catch((err) => {
-        logger.error(err)
+        console.log(err)
+        //logger.error(err)
     })
